@@ -5,19 +5,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
     public static WebDriver driver;
-    public static final String URL = "https://demoqa.com/";
+    public static final String URL = "https://demoqa.com/automation-practice-form";
 
-    @BeforeClass
+    @BeforeMethod
     static void webdrivermanagerSetup() {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
+        options.setHeadless(false);
 
         driver = new ChromeDriver(options);
 
@@ -25,7 +25,8 @@ public class BaseTest {
     }
 
     @AfterMethod
-    static void quitBrowser() {
+    static void quitBrowser() throws InterruptedException {
+        Thread.sleep(5000);
         driver.quit();
     }
 }
