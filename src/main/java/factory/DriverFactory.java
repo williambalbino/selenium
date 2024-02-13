@@ -11,10 +11,9 @@ public class DriverFactory {
         BrowserList browserType = BrowserList.valueOf(browser.toUpperCase());
 
         driver = switch (browserType) {
-            case CHROME -> new DriverManager().createChromeDriver(browser);
-            case FIREFOX -> new DriverManager().createFirefoxDriver(browser);
-            case EDGE -> new DriverManager().createEdgeDriver(browser);
-            case SAFARI -> new DriverManager().createSafariDriver(browser);
+            case CHROME -> new DriverManager().createChromeDriver();
+            case FIREFOX -> new DriverManager().createFirefoxDriver();
+            case EDGE -> new DriverManager().createEdgeDriver();
         };
 
         return driver;

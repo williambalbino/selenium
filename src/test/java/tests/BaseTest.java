@@ -12,10 +12,8 @@ public class BaseTest {
 
     @BeforeMethod
     static void webdrivermanagerSetup() {
-        String browser = "chrome";
-
+        String browser = "edge";
         driver = new DriverFactory().createInstance(browser);
-
         driver.get(URL);
     }
 
