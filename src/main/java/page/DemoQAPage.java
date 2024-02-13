@@ -44,6 +44,9 @@ public class DemoQAPage {
     @FindBy(css = "input[type=file]")
     private WebElement fileInput;
 
+    @FindBy(id = "submit")
+    private WebElement submitBtn;
+
     File file = new File("resources/Screenshot.png");
 
     public DemoQAPage(WebDriver driver){
@@ -83,5 +86,9 @@ public class DemoQAPage {
     public void uploadFile() throws InterruptedException {
         fileInput.sendKeys(file.getAbsolutePath());
         //adicionar teste separado depois
+    }
+
+    public void submitForm() {
+        submitBtn.click();
     }
 }

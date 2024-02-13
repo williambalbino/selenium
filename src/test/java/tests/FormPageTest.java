@@ -19,9 +19,6 @@ class FormPageTest extends BaseTest{
         demoPage.fillEmail("email@email.com");
         demoPage.selectGender();
         demoPage.fillPhoneNumber("1234567890");
-        //demoPage.selectDateOfBirth();
-        demoPage.selectHobbies();
         demoPage.uploadFile();
     }
 }
-
