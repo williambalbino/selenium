@@ -1,53 +1,45 @@
 package page;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
+import java.time.Duration;
 import java.util.List;
-
 
 public class DemoQAPage {
 
     private WebDriver driver;
 
-    @FindBy(id = "firstName")
-    private WebElement firstNameField;
+    @FindBy(id = "name")
+    private WebElement nameField;
 
-    @FindBy(id = "lastName")
-    private WebElement lastNameField;
-
-    @FindBy(id = "userEmail")
+    @FindBy(id = "email")
     private WebElement email;
 
-    @FindBy(css = ".custom-control-label")
-    private List<WebElement> maleGender;
-
-    @FindBy(id = "userNumber")
+    @FindBy(id = "phone")
     private WebElement phoneNumber;
 
-    @FindBy(id = "dateOfBirthInput")
-    private WebElement dateOfBirth;
+    @FindBy(id = "subject")
+    private WebElement subject;
 
-    @FindBy(css = ".react-datepicker__month-select")
-    private Select month;
+    @FindBy(id = "description")
+    private WebElement message;
 
-    @FindBy(xpath = "//label[@class='custom-control-label']")
-    private List<WebElement> hobbies;
+    @FindBy(css = ".col-sm-5 > div > p")
+    private List<WebElement> successSubject;
 
-    @FindBy(id = "currentAddress")
-    private WebElement currentAddress;
+//    @FindBy(css = "input[type=file]")
+//    private WebElement fileInput;
+//    File file = new File("resources/Screenshot.png");
 
-    @FindBy(css = "input[type=file]")
-    private WebElement fileInput;
-
-    @FindBy(id = "submit")
+    @FindBy(id = "submitContact")
     private WebElement submitBtn;
 
-    File file = new File("resources/Screenshot.png");
 
     public DemoQAPage(WebDriver driver){
         this.driver = driver;
@@ -55,40 +47,38 @@ public class DemoQAPage {
     }
 
     public void fillFirstName(String firstName){
-        this.firstNameField.sendKeys(firstName);
-    }
-
-    public void fillLastName(String lastName){
-        this.lastNameField.sendKeys(lastName);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(nameField));
+        this.nameField.sendKeys(firstName);
     }
 
     public void fillEmail(String email){
         this.email.sendKeys(email);
     }
 
-    public void selectGender(){
-        this.maleGender.get(0).click();
-    }
-
     public void fillPhoneNumber(String number) {
         this.phoneNumber.sendKeys(number);
     }
 
-    public void selectDateOfBirth(){
-        this.dateOfBirth.click();
-        this.month.deselectByVisibleText("MAY");
+    public void fillSubject(String subject){
+        this.subject.sendKeys(subject);
     }
 
-    public void selectHobbies() {
-        this.hobbies.get(3).click();
+    public void fillMessage(String message) {
+        this.message.sendKeys(message);
     }
 
-    public void uploadFile() throws InterruptedException {
-        fileInput.sendKeys(file.getAbsolutePath());
-        //adicionar teste separado depois
-    }
+//    public void uploadFile() throws InterruptedException {
+//        fileInput.sendKeys(file.getAbsolutePath());
+//        //adicionar teste separado depois
+//    }
 
     public void submitForm() {
-        submitBtn.click();
+        this.submitBtn.click();
+    }
+
+    public String getSuccessSubject(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        return this.successSubject.get(1).getText();
     }
 }

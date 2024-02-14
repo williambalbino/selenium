@@ -8,17 +8,18 @@ import org.testng.annotations.BeforeMethod;
 public class BaseTest {
 
     public static WebDriver driver;
-    public static final String URL = "https://demoqa.com/automation-practice-form";
+    public static final String URL = "https://automationintesting.online/";
 
     @BeforeMethod
     static void webdrivermanagerSetup() {
-        String browser = "edge";
+        String browser = "chrome";
         driver = new DriverFactory().createInstance(browser);
         driver.get(URL);
     }
 
     @AfterMethod
     static void quitBrowser() throws InterruptedException {
+        Thread.sleep(5000);
         driver.quit();
     }
 }
