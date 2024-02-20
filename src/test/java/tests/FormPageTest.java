@@ -1,5 +1,7 @@
 package tests;
 
+import data.Message;
+import data.MessageDataFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.DemoQAPage;
@@ -7,18 +9,18 @@ import page.DemoQAPage;
 class FormPageTest extends BaseTest{
 
     @Test
-    public void getTitleTest() {
-        Assert.assertEquals("DEMOQA", BaseTest.driver.getTitle());
-    }
+    public void fillForm()  {
 
-    @Test
-    public void fillForm() throws InterruptedException {
+        Message validMessage = MessageDataFactory.createMessage();
         DemoQAPage demoPage = new DemoQAPage(driver);
-        demoPage.fillFirstName("John");
-        demoPage.fillLastName("Doe");
-        demoPage.fillEmail("email@email.com");
-        demoPage.selectGender();
-        demoPage.fillPhoneNumber("1234567890");
-        demoPage.uploadFile();
+
+        demoPage.fillFirstName(validMessage.getName());
+        demoPage.fillEmail(validMessage.getEmail());
+        demoPage.fillPhoneNumber(validMessage.getPhoneNumber());
+        demoPage.fillSubject(validMessage.getSubject());
+        demoPage.fillMessage(validMessage.getMessage());
+        demoPage.submitForm();
+
+        Assert.assertEquals(demoPage.getSuccessSubject(), validMessage.getSubject());
     }
 }
