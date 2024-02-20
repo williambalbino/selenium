@@ -32,6 +32,11 @@
             <artifactId>datafaker</artifactId>
             <version>2.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>1.0.12</version>
+        </dependency>
 
     </dependencies>
 

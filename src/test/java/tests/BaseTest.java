@@ -1,25 +1,29 @@
 package tests;
 
+import config.ConfigProperties;
 import factory.DriverFactory;
+import factory.EnvironmentFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.IOException;
+
 public class BaseTest {
 
     public static WebDriver driver;
-    public static final String URL = "https://automationintesting.online/";
 
     @BeforeMethod
-    static void webdrivermanagerSetup() {
-        String browser = "chrome";
-        driver = new DriverFactory().createInstance(browser);
-        driver.get(URL);
+    static void webdrivermanagerSetup() throws IOException {
+        ConfigProperties.initializePropertyFile();
+        String env = ConfigProperties.property.getProperty("env");
+        String url = ConfigProperties.property.getProperty("url.base");
+        driver = new EnvironmentFactory().createInstance(env);
+        driver.get(url);
     }
 
     @AfterMethod
     static void quitBrowser() throws InterruptedException {
-        Thread.sleep(5000);
         driver.quit();
     }
 }
