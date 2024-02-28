@@ -1,6 +1,5 @@
 package config;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,6 +20,18 @@ public class ConfigProperties  {
             throw new RuntimeException(e);
         }
         property.load(file);
+    }
+
+    public static String getBrowser(){
+        return ConfigProperties.property.getProperty("browser");
+    }
+
+    public static String getEnvironment(){
+        return ConfigProperties.property.getProperty("env");
+    }
+
+    public static String getUrl(){
+        return ConfigProperties.property.getProperty("url.base");
     }
 
 }
