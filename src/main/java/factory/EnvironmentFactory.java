@@ -1,27 +1,22 @@
 package factory;
 
 import config.ConfigProperties;
+import enums.Environment;
 import org.openqa.selenium.WebDriver;
+
+import java.net.MalformedURLException;
 
 public class EnvironmentFactory {
 
-    public WebDriver createInstance(String env){
+    public WebDriver createInstance(String browser) throws MalformedURLException {
+        Environment env = Environment.get(ConfigProperties.getEnvironment());
 
-        if(env.equals("local")){
-            return new DriverFactory().createLocalDriver(ConfigProperties.property.getProperty("browser"));
-        }
-        return null;
+        return switch (env) {
+            case LOCAL -> new DriverFactory().createLocalDriver(ConfigProperties.getBrowser());
+            case SELENIUM_GRID -> new DriverFactory().createRemoteInstance(browser);
+        };
     }
 
-//    private RemoteWebDriver createRemoteInstance(MutableCapabilities capability) {
-//        RemoteWebDriver remoteWebDriver;
-//        String gridURL = format("http://%s:%s", configuration().gridUrl(), configuration().gridPort());
-//        try {
-//            remoteWebDriver = new RemoteWebDriver(URI.create(gridURL).toURL(), capability);
-//        } catch (MalformedURLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return remoteWebDriver;
-//    }
+
 
 }
