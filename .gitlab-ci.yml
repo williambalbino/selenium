@@ -20,4 +20,4 @@ build:
 test:
   stage: test
   script:
-    - mvn test -Dtest=GithubWDMPageTest
+    - mvn test -Dtest=GithubWDMPageTest1
